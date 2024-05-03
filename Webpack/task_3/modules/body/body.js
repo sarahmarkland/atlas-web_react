@@ -1,12 +1,11 @@
-// src/index.js
+// modules/body.js
 import $ from 'jquery';
 import _ from 'lodash';
-import '../css/main.css';
+import './body.css';
 
 $('body').append('<p>Dashboard data for the students</p>');
 $('body').append('<button>Click here to get started</button>');
 $('body').append('<p id="count">0</p>');
-$('body').append('<p>Copyright - Holberton School</p>');
 
 $(document).ready(function() {
   let count = 0;

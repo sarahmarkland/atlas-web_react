@@ -1,15 +1,18 @@
 const path = require('path');
-const webpack = require('webpack');
+const webpack = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'development',
   entry: {
-    main: path.resolve(__dirname, './js/dashboard_main.js'),
+    header: path.resolve(__dirname, './modules/header/header.js'),
+    body: path.resolve(__dirname, './modules/body/body.js'),
+    footer: path.resolve(__dirname, './modules/footer/footer.js'),
   },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'public')
   },
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
@@ -30,6 +33,6 @@ module.exports = {
     hot: true,
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.CleanWebpackPlugin(),
   ],
 };
