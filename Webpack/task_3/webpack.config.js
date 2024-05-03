@@ -34,5 +34,8 @@ module.exports = {
   },
   plugins: [
     new webpack.CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({ 
+      template: 'index.html'
+    }),
   ],
 };
