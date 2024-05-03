@@ -1,5 +1,6 @@
 const path = require('path');
-const webpack = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // Correct import statement
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -23,6 +24,10 @@ module.exports = {
         test: /\.jpg/,
         use: ['file-loader', 'image-webpack-loader']
       },
+      {
+        test: /\.html$/,
+        use: ['html-loader']
+      },
     ],
   },
   devServer: {
@@ -33,9 +38,9 @@ module.exports = {
     hot: true,
   },
   plugins: [
-    new webpack.CleanWebpackPlugin(),
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({ 
-      template: 'index.html'
+      template: './index.html'
     }),
   ],
 };
