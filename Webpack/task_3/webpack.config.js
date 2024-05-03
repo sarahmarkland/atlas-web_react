@@ -40,7 +40,8 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({ 
-      template: './index.html'
+      template: './index.html',
+      chunks: 'all',
     }),
   ],
 };
