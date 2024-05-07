@@ -33,11 +33,10 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ],
-    "jest": {
-      "setupFilesAfterEnv": [
-        "./src/setupTests.js"
-      ]
-    }
+    ]
+  },
+  "devDependencies": {
+    "@cfaester/enzyme-adapter-react-16": "^1.0.7",
+    "enzyme": "^3.11.0"
   }
 }
