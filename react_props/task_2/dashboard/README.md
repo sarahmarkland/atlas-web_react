@@ -1,1 +1,1 @@
-readme for dashboard in task_0 react_props
+readme for dashboard in task_2 react_props
