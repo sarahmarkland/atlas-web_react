@@ -19,8 +19,8 @@ function App() {
             <input className='form-input' type="email" id="email" />
             <label className='form-label' htmlFor="password">Password</label>
             <input className='form-input' type="password" id="password" />
+            <button className='OK-button'>OK</button>
           </div>
-          <button className='OK-button'>OK</button>
         </div>
       </div>
       <hr></hr>
