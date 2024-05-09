@@ -1,0 +1,82 @@
+body {
+  font-family: sans-serif;
+}
+
+.App {
+  text-align: center;
+}
+
+/* .App-logo {
+  height: 250px;
+  pointer-events: none;
+} */
+
+/* .App-header {
+  background-color: #fff;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: white;
+}
+
+.App-header h1 {
+  color: red;
+} */
+
+.App-link {
+  color: #61dafb;
+}
+
+/* .App-body {
+  display: flex;
+  padding: 20px;
+  padding-bottom: 300px;
+  text-align: left;
+}
+
+.body-content {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center;
+}
+
+.form-group {
+  margin-bottom: 10px;
+} */
+
+/* hr {
+  height: 2px;
+  background-color: red;
+} */
+
+/* footer {
+  font-style: italic;
+} */
+
+.body-text {
+  margin-top: 3rem;
+  margin-left: 2rem;
+}
+
+/* .form-label {
+  margin-left: 2rem;
+}
+
+.form-input {
+  max-height: 15px;
+  margin-left: 2rem;
+}
+
+.OK-button {
+  margin-left: 2rem;
+  height: 20px;
+} */
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
