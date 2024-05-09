@@ -5,9 +5,17 @@ import PropTypes from 'prop-types';
 
 function NotificationItem({ type = 'default', html, value }) {
   return (
-    <li data-notification-type={type} dangerouslySetInnerHTML={html ? { __html: value } : null}>
-      {html ? null : value}
-    </li>
+    // <li data-notification-type={type} dangerouslySetInnerHTML={html ? { __html: value } : null}>
+    //   {html ? null : value}
+    // </li>
+    <>
+    {html ? (
+      <li data-priority={type} dangerouslySetInnerHTML={html}></li>
+    ) : (
+      <li data-priority={type}>{value}</li>
+    )
+    }
+    </>
   );
 }
 

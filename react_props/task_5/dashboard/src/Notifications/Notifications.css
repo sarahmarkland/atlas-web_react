@@ -1,7 +1,7 @@
 /* task_1/dashboard/src/Notifications.css */
 
 .Notifications {
-    border: 1px solid #ccc;
+    border: 3px dotted red;
     padding: 10px;
 }
 
@@ -11,4 +11,9 @@
 
 .Notifications ul li[data-priority="urgent"] {
     color: red;
+}
+
+.notificationMenu {
+    position: absolute;
+    right: 1%;
 }
