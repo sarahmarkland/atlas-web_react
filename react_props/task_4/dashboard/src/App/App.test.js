@@ -6,6 +6,7 @@ import Notifications from '../Notifications/Notifications';
 import Header from '../Header/Header';
 import Login from '../Login/Login';
 import Footer from '../Footer/Footer';
+import CourseList from '../CourseList/CourseList';
 
 describe('App component', () => {
   let wrapper;
@@ -39,4 +40,23 @@ describe('App component', () => {
     // const wrapper = shallow(<App />);
     expect(wrapper.find(Footer).exists()).toBe(true);
   });
-});
+
+  it('should not display CourseList', () => {
+    const wrapper = shallow(<App isLoggedIn={false} />);
+    expect(wrapper.find(CourseList).exists()).toBe(false);
+  });
+
+  describe('when isLoggedIn is true', () => {
+    it('should not include the Login component', () => {
+      const wrapper = shallow(<App isLoggedIn={true} />);
+      expect(wrapper.find(Login).exists()).toBe(false);
+    });
+
+    it('should include the CourseList component', () => {
+      const wrapper = shallow(<App isLoggedIn={true} />);
+      expect(wrapper.find(CourseList).exists()).toBe(true);
+    });
+  }
+  );
+}
+);

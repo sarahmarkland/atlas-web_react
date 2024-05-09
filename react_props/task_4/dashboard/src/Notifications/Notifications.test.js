@@ -18,4 +18,25 @@ describe('Notifications component', () => {
     const wrapper = shallow(<Notifications />);
     expect(wrapper.text()).toContain('Here is the list of notifications');
   });
+
+  it('should display menu item when displayDrawer is false', () => {
+    const wrapper = shallow(<Notifications />);
+    expect(wrapper.find('.menuItem')).toHaveLength(1);
+    expect(wrapper.find('.Notifications')).toHaveLength(0);
+  });
+
+  it('should not display div.Notifications when displayDrawer is false', () => {
+    const wrapper = shallow(<Notifications />);
+    expect(wrapper.find('.Notifications')).toHaveLength(0);
+  });
+
+  it('should display menu item when displayDrawer is true', () => {
+    const wrapper = shallow(<Notifications displayDrawer={true} />);
+    expect(wrapper.find('.menuItem')).toHaveLength(1);
+  });
+
+  it('should display div.Notifications when displayDrawer is true', () => {
+    const wrapper = shallow(<Notifications displayDrawer={true} />);
+    expect(wrapper.find('.Notifications')).toHaveLength(1);
+  });
 });
