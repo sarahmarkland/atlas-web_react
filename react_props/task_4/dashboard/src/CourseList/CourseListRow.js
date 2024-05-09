@@ -1,7 +1,7 @@
 // src/CourseList/CourseListRow.js
 import React from 'react';
 import PropTypes from 'prop-types';
-import './CourseListRow.css';
+import './CourseList.css';
 
 function CourseListRow({ isHeader = false, textFirstCell, textSecondCell }) {
   return (

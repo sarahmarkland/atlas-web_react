@@ -1,6 +1,7 @@
 // src/CourseList/CourseList.js
 import React from 'react';
 import CourseListRow from './CourseListRow';
+import './CourseList.css';
 
 function CourseList() {
   return (
