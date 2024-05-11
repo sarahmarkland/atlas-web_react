@@ -1,27 +1,22 @@
-import React, { Component } from 'react';
+// task_1/dashboard/src/Notifications/NotificationItem.js
+
+import React from 'react';
 import PropTypes from 'prop-types';
 
-class NotificationItem extends Component {
-  handleClick = () => {
-    const { id, markAsRead } = this.props;
-    if (markAsRead) {
-      markAsRead(id);
+function NotificationItem({ type = 'default', html, value }) {
+  return (
+    // <li data-notification-type={type} dangerouslySetInnerHTML={html ? { __html: value } : null}>
+    //   {html ? null : value}
+    // </li>
+    <>
+    {html ? (
+      <li data-priority={type} dangerouslySetInnerHTML={html}></li>
+    ) : (
+      <li data-priority={type}>{value}</li>
+    )
     }
-  };
-
-  render() {
-    const { type = 'default', html, value } = this.props;
-
-    return (
-      <>
-        {html ? (
-          <li data-priority={type} onClick={this.handleClick} dangerouslySetInnerHTML={html}></li>
-        ) : (
-          <li data-priority={type} onClick={this.handleClick}>{value}</li>
-        )}
-      </>
-    );
-  }
+    </>
+  );
 }
 
 NotificationItem.propTypes = {
@@ -29,9 +24,7 @@ NotificationItem.propTypes = {
   html: PropTypes.shape({
     __html: PropTypes.string.isRequired
   }),
-  value: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
-  markAsRead: PropTypes.func,
+  value: PropTypes.string.isRequired
 };
 
 export default NotificationItem;

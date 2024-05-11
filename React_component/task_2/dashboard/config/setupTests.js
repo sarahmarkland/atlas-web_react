@@ -5,5 +5,11 @@
 import '@testing-library/jest-dom';
 import { configure } from 'enzyme';
 import Adapter from '@cfaester/enzyme-adapter-react-18';
+import { JSDOM } from 'jsdom';
+
+const newDom = new JSDOM('');
+global.window = newDom.window;
+global.document = newDom.window.document;
+global.alert = jest.fn();
 
 configure({ adapter: new Adapter() });

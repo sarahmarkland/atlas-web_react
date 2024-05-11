@@ -1,28 +1,16 @@
 // task_1/dashboard/src/Notifications.js
 
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './Notifications.css';
 import NotificationItem from './NotificationItem';
+// import { getLatestNotification } from '../utils/utils';
 import { NotificationItemShape } from './NotificationItemShape';
 
-class Notifications extends Component {
-  constructor(props) {
-    super(props);
-    this.markAsRead = this.markAsRead.bind(this);
-}
-
-handleButtonClick = () => {
-  console.log('Close button has been clicked');
-};
-
-markAsRead(id) {
-  console.log(`Notification ${id} has been marked as read`);
-}
-
-render() {
-  const { displayDrawer, listNotifications } = this.props;
-
+function Notifications({ displayDrawer = true, listNotifications = []}) {
+  const handleButtonClick = () => {
+    console.log('Close button has been clicked');
+  };
   return (
     <>
     <div className='notificationMenu'>
@@ -37,7 +25,7 @@ render() {
               cursor: 'pointer',
             }}
             aria-label='Close'
-            onClick={this.handleButtonClick}
+            onClick={handleButtonClick}
           >
             x
           </button>
@@ -55,7 +43,11 @@ render() {
                   html={notification.html}
                 />
               ))}
+              {/* <NotificationItem type='default' value='New course available' />
+              <NotificationItem type='urgent' value='New resume available' />
+              <NotificationItem type='urgent' html={{ __html: getLatestNotification() }} /> */}
             </ul>
+
           </>
           )}
         </div>
@@ -63,7 +55,6 @@ render() {
       </div>
     </>
   );
-}
 }
 
 Notifications.propTypes = {
