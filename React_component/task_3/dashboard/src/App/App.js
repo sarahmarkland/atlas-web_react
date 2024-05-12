@@ -7,6 +7,8 @@ import Login from '../Login/Login';
 import Notifications from '../Notifications/Notifications';
 import CourseList from '../CourseList/CourseList';
 import { getLatestNotification } from '../utils/utils';
+import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
+import BodySection from '../BodySection/BodySection';
 
 class App extends Component {
 
@@ -61,7 +63,22 @@ class App extends Component {
         <Notifications displayDrawer={true} listNotifications={listNotifications} />
         <div className='App'>
           <Header />
-          {isLoggedIn ? <CourseList listCourses={listCourses} /> : <Login />}
+
+          {/* Wrap CourseList with BodySectionWithMarginBottom */}
+          <BodySectionWithMarginBottom title='Course list'>
+            <CourseList listCourses={listCourses} />
+          </BodySectionWithMarginBottom>
+
+          {/* Wrap Login with BodySectionWithMarginBottom */}
+          <BodySectionWithMarginBottom title='Log in to continue'>
+            <Login />
+          </BodySectionWithMarginBottom>
+
+          {/* Add a new block with BodySection */}
+          <BodySection title='News from the School'>
+            <p>Some news</p>
+          </BodySection>
+
           <Footer />
         </div>
       </>
