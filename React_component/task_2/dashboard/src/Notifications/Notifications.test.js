@@ -9,9 +9,12 @@ describe('Notifications component', () => {
     expect(wrapper.exists()).toBe(true);
   });
 
-  it('should render three list items by default', () => {
-    const wrapper = shallow(<Notifications />);
-    expect(wrapper.find(NotificationItem)).toHaveLength(3);
+  it('should render the text "Here is the list of notifications" when listNotifications is not empty', () => {
+    const listNotifications = [
+      { id: 1, type: 'default', value: 'New course available' },
+    ];
+    const wrapper = shallow(<Notifications listNotifications={listNotifications} />);
+    expect(wrapper.text()).toContain('Here is the list of notifications');
   });
 
   it('should render the message "No new notification for now" when listNotifications is empty', () => {
