@@ -7,8 +7,10 @@ describe('CourseListRow component', () => {
   describe('When isHeader is true', () => {
     it('should render one cell with colspan = 2 when textSecondCell does not exist', () => {
       const wrapper = shallow(<CourseListRow isHeader textFirstCell="Header" />);
-      expect(wrapper.find('th')).toHaveLength(1);
-      expect(wrapper.find('th').prop('colSpan')).toEqual('2');
+
+      const th = wrapper.find('th');
+      expect(th).toHaveLength(1);
+      expect(th.prop('colSpan')).toEqual('2');
     });
 
     it('should render two cells when textSecondCell is present', () => {

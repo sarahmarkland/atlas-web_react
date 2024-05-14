@@ -11,26 +11,28 @@ const headerRowStyle = {
   backgroundColor: '#deb5b545',
 };
 
-function CourseListRow({ isHeader = false, textFirstCell, textSecondCell }) {
-  return (
-    <tr style={isHeader ? headerRowStyle : rowStyle}>
-      {isHeader ? (
-        textSecondCell === null ? (
-          <th colSpan="2">{textFirstCell}</th>
-        ) : (
-          <>
-            <th>{textFirstCell}</th>
-            <th>{textSecondCell}</th>
-          </>
-        )
-      ) : (
-        <>
-          <td>{textFirstCell}</td>
-          <td>{textSecondCell}</td>
-        </>
-      )}
-    </tr>
-  );
+function CourseListRow({ isHeader = false, textFirstCell, textSecondCell = null }) {
+  if (isHeader) {
+    return (
+      <tr style={rowStyle}>
+          {textSecondCell === null ? (
+            <th colSpan="2">{textFirstCell}</th>
+          ) : (
+            <>
+              <th>{textFirstCell}</th>
+              <th>{textSecondCell}</th>
+            </>
+          )}
+      </tr>
+    );
+  } else {
+    return (
+      <tr style={headerRowStyle}>
+            <td>{textFirstCell}</td>
+            <td>{textSecondCell}</td>
+      </tr>
+    );
+  }
 }
 
 CourseListRow.propTypes = {
