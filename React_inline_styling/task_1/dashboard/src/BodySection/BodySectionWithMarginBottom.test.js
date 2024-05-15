@@ -1,10 +1,18 @@
-// BodySectionWithMarginBottom.test.js
-import React from 'react';
+// REACT INLINE - TASK 1: bodySectionWithMarginBottom.js
 import { shallow } from 'enzyme';
 import BodySectionWithMarginBottom from './BodySectionWithMarginBottom';
 import BodySection from './BodySection';
+import { StyleSheetTestUtils } from 'aphrodite';
 
 describe('BodySectionWithMarginBottom component', () => {
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
   it('renders a BodySection component with correct props', () => {
     const wrapper = shallow(
       <BodySectionWithMarginBottom title="test title">
