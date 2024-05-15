@@ -1,8 +1,16 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Footer from './Footer';
+import { StyleSheetTestUtils } from 'aphrodite';
 
 describe('Footer Component', () => {
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
   it('should render without crashing', () => {
     const wrapper = shallow(<Footer />);
     expect(wrapper.exists()).toBe(true);

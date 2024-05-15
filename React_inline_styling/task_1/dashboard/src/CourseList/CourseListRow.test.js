@@ -2,8 +2,17 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import CourseListRow from './CourseListRow';
+import { StyleSheetTestUtils } from 'aphrodite';
 
 describe('CourseListRow component', () => {
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
   describe('When isHeader is true', () => {
     it('should render one cell with colspan = 2 when textSecondCell does not exist', () => {
       const wrapper = shallow(<CourseListRow isHeader textFirstCell="Header" />);

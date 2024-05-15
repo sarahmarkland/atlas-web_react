@@ -2,8 +2,18 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import CourseList from './CourseList';
 import CourseListRow from './CourseListRow';
+import { StyleSheetTestUtils } from 'aphrodite';
 
 describe('CourseList component', () => {
+
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
   it('should render without crashing', () => {
     const wrapper = shallow(<CourseList />);
     expect(wrapper.exists()).toBe(true);

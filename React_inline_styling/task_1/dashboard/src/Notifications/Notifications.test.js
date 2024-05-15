@@ -3,8 +3,17 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Notifications from './Notifications';
 import NotificationItem from './NotificationItem';
+import { StyleSheetTestUtils } from 'aphrodite';
 
 describe('Notifications component', () => {
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
   it('should render without crashing', () => {
     const wrapper = shallow(<Notifications />);
     expect(wrapper.exists()).toBe(true);
