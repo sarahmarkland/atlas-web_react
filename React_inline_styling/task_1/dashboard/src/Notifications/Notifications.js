@@ -1,9 +1,9 @@
 // TASK 10
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './Notifications.css';
 import NotificationItem from './NotificationItem';
 import { NotificationItemShape } from './NotificationItemShape';
+import { StyleSheet, css } from 'aphrodite';
 
 class Notifications extends Component {
   static propTypes = {
@@ -43,17 +43,12 @@ class Notifications extends Component {
 
     return (
       <>
-        <div className='notificationMenu'>
-          <div className='menuItem'>Your notifications</div>
+        <div className={css(styles.notificationMenu)}>
+          <div className={css(styles.menuItem)}>Your notifications</div>
           {displayDrawer && (
-            <div className='Notifications'>
+            <div className={css(styles.Notifications)}>
               <button
-                style={{
-                  float: 'right',
-                  backgroundColor: 'transparent',
-                  border: 'none',
-                  cursor: 'pointer',
-                }}
+                className={css(styles.closeButton)}
                 aria-label='Close'
                 onClick={this.handleButtonClick}
               >
@@ -64,7 +59,7 @@ class Notifications extends Component {
               ) : (
                 <>
                   <p>Here is the list of notifications</p>
-                  <ul>
+                  <ul className={css(styles.notificationList)}>
                     {listNotifications.map((notification) => (
                       <NotificationItem
                         key={notification.id}
@@ -85,5 +80,29 @@ class Notifications extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  notificationMenu: {
+    position: 'absolute',
+    right: '1%',
+  },
+  menuItem: {
+    // Define styles for menu item
+  },
+  Notifications: {
+    border: '3px dotted red',
+    padding: '10px',
+  },
+  closeButton: {
+    float: 'right',
+    backgroundColor: 'transparent',
+    border: 'none',
+    cursor: 'pointer',
+  },
+  notificationList: {
+    listStyleType: 'none',
+    padding: 0,
+  },
+});
 
 export default Notifications;

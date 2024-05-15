@@ -97,6 +97,15 @@ const styles = StyleSheet.create({
   bodyText: {
     marginTop: '3rem',
     marginLeft: '2rem',
+  },
+
+  footer: {
+    position: 'fixed',
+    bottom: 0,
+    width: '100%',
+    borderTop: '3px solid #FF0000',
+    textAlign: 'center',
+    fontStyle: 'italic',
   }
 });
 
