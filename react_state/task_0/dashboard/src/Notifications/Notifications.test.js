@@ -1,4 +1,3 @@
-// TASK 11 - React_component; Notifications.test.js
 import React from 'react';
 import { shallow } from 'enzyme';
 import Notifications from './Notifications';
@@ -28,6 +27,7 @@ describe('Notifications component', () => {
     const wrapper = shallow(<Notifications listNotifications={listNotifications} />);
     expect(wrapper.text()).toContain('Here is the list of notifications');
   });
+
   it('should call markAsRead with the correct ID when a notification is marked as read', () => {
     const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
     const listNotifications = [
@@ -78,9 +78,8 @@ describe('Notifications component', () => {
 
     expect(renderSpy).toHaveBeenCalledTimes(0);
     renderSpy.mockRestore();
-}); 
+  }); 
 
-// task 11
   it('should rerender when updating props with a longer list', () => {
     const initialListNotifications = [
       { id: 1, type: 'default', value: 'New course available' },
@@ -95,5 +94,21 @@ describe('Notifications component', () => {
     wrapper.setProps({ listNotifications: updatedListNotifications });
     expect(shouldComponentUpdateSpy).toHaveBeenCalled();
     shouldComponentUpdateSpy.mockRestore();
+  });
+
+  it('should call handleDisplayDrawer when the menu item is clicked', () => {
+    const handleDisplayDrawer = jest.fn();
+    const wrapper = shallow(<Notifications handleDisplayDrawer={handleDisplayDrawer} />);
+    
+    wrapper.find('.menuItem').simulate('click');
+    expect(handleDisplayDrawer).toHaveBeenCalled();
+  });
+
+  it('should call handleHideDrawer when the close button is clicked', () => {
+    const handleHideDrawer = jest.fn();
+    const wrapper = shallow(<Notifications displayDrawer={true} handleHideDrawer={handleHideDrawer} />);
+    
+    wrapper.find('.closeButton').simulate('click');
+    expect(handleHideDrawer).toHaveBeenCalled();
   });
 });
