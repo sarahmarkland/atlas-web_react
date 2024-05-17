@@ -83,7 +83,7 @@ class Notifications extends Component {
 
 const styles = StyleSheet.create({
   notificationMenu: {
-    position: 'absolute',
+    // position: 'absolute',
     right: '1%',
   },
   menuItem: {

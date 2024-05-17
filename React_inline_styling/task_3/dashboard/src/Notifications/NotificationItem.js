@@ -1,4 +1,4 @@
-// REACT INLINE - TASK 2: NotificationItem.js
+// REACT INLINE - TASK 3: NotificationItem.js
 import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
@@ -11,6 +11,13 @@ const NotificationItem = React.memo(({ id, type = 'default', html, value, markAs
     urgent: {
       color: 'red',
     },
+    item: {
+      width: '100%',
+      borderBottom: '1px solid black',
+      fontSize: '20px',
+      padding: '10px 8px',
+      boxSizing: 'border-box'
+    }
   });
 
   const priorityStyle = type === 'urgent' ? styles.urgent : styles.default;
@@ -20,12 +27,12 @@ const NotificationItem = React.memo(({ id, type = 'default', html, value, markAs
     {html ? (
       <li 
         data-priority={type}
-        className={css(priorityStyle)}
+        className={css(priorityStyle, styles.item)}
         dangerouslySetInnerHTML={html}
         onClick={() => markAsRead(id)}
-        ></li>
+      ></li>
     ) : (
-      <li data-priority={type} className={css(priorityStyle)} onClick={() => markAsRead(id)}>{value}</li>
+      <li data-priority={type} className={css(priorityStyle, styles.item)} onClick={() => markAsRead(id)}>{value}</li>
     )}
     </>
   );
