@@ -89,6 +89,12 @@ const styles = StyleSheet.create({
   menuItem: {
     // Define styles for menu item
   },
+
+  ul: {
+    '@media (max-width: 900px)': {
+      padding: '0'
+    },
+  },
   Notifications: {
     border: '3px dotted red',
     padding: '10px',

@@ -1,4 +1,4 @@
-// TASK 10
+// REACT INLINE - TASK 4
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import NotificationItem from './NotificationItem';
@@ -44,7 +44,9 @@ class Notifications extends Component {
     return (
       <>
         <div className={css(styles.notificationMenu)}>
-          <div className={css(styles.menuItem)}>Your notifications</div>
+          {!displayDrawer && (
+            <div className={css(styles.menuItem)}>Your notifications</div>
+          )}
           {displayDrawer && (
             <div className={css(styles.Notifications)}>
               <button
@@ -81,17 +83,50 @@ class Notifications extends Component {
   }
 }
 
+const opacityChange = {
+  '0%': { opacity: 1 },
+  '50%': { opacity: 0.5 },
+  '100%': { opacity: 1 },
+};
+
+const bounce = {
+  '0%': { transform: 'translateY(0)' },
+  '50%': { transform: 'translateY(-5px)' },
+  '100%': { transform: 'translateY(5px)' }
+};
+
 const styles = StyleSheet.create({
   notificationMenu: {
     // position: 'absolute',
     right: '1%',
   },
   menuItem: {
-    // Define styles for menu item
+    position: 'absolute',
+    right: '10px',
+    backgroundColor: '#fff8f8',
+    cursor: 'pointer',
+    ':hover': {
+      animationName: [opacityChange, bounce],
+      animationDuration: '1s, 0.5s',
+      animationIterationCount: '3, 3',
+    },
+    
+  },
+
+  ul: {
+    '@media (max-width: 900px)': {
+      padding: '0'
+    },
   },
   Notifications: {
     border: '3px dotted red',
     padding: '10px',
+    '@media (max-width: 900px)': {
+      width: '100%',
+      border: 'none',
+      padding: '0',
+      height: '100vh',
+    },
   },
   closeButton: {
     float: 'right',
