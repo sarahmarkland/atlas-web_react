@@ -26,20 +26,17 @@ class Notifications extends Component {
   constructor(props) {
     super(props);
     this.markAsRead = this.markAsRead.bind(this);
-    this.state = {
-      prevListLength: props.listNotifications.length,
-    };
   }
 
   shouldComponentUpdate(nextProps) {
     return nextProps.listNotifications.length > this.props.listNotifications.length || nextProps.displayDrawer !== this.props.displayDrawer;
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.listNotifications !== prevProps.listNotifications) {
-      this.setState({ prevListLength: this.props.listNotifications.length });
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.listNotifications !== prevProps.listNotifications) {
+  //     this.setState({ prevListLength: this.props.listNotifications.length });
+  //   }
+  // }
 
   render() {
     const { displayDrawer, listNotifications, handleDisplayDrawer, handleHideDrawer } = this.props;

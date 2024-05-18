@@ -1,4 +1,4 @@
-// React Inline Styling Task 3: Responsiveness
+// React State - Task 0: add local state for notifications
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import PropTypes from 'prop-types';
@@ -12,7 +12,6 @@ import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBot
 import BodySection from '../BodySection/BodySection';
 
 class App extends Component {
-
   static propTypes = {
     isLoggedIn: PropTypes.bool,
     logOut: PropTypes.func,
@@ -25,7 +24,12 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.state = {
+      displayDrawer: false,
+    };
+      this.handleKeyDown = this.handleKeyDown.bind(this);
+      this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
+      this.handleHideDrawer = this.handleHideDrawer.bind(this);
   }
 
   componentDidMount() {
@@ -44,8 +48,19 @@ class App extends Component {
     }
   }
 
+  handleDisplayDrawer() {
+    console.log('Display drawer');
+    this.setState({ displayDrawer: true });
+  }
+
+  handleHideDrawer() {
+    console.log('Hide drawer');
+    this.setState({ displayDrawer: false });
+  }
+
   render() {
     const { isLoggedIn = false } = this.props;
+    const { displayDrawer } = this.state;
 
     const listCourses = [
     { id: 1, name: 'ES6', credit: 60 },
@@ -61,7 +76,12 @@ class App extends Component {
 
     return (
       <>
-        <Notifications displayDrawer={true} listNotifications={listNotifications} />
+        <Notifications
+        displayDrawer={this.state.displayDrawer}
+        listNotifications={listNotifications} 
+        handleDisplayDrawer={this.handleDisplayDrawer}
+        handleHideDrawer={this.handleHideDrawer}
+      />
         <div className={css(styles.App)}>
           <Header />
           {isLoggedIn ? (
