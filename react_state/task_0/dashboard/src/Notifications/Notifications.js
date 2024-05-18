@@ -46,7 +46,7 @@ class Notifications extends Component {
         <div className={css(styles.notificationMenu)}>
           {!displayDrawer && (
             <div className={css(styles.menuItem)} onClick={handleDisplayDrawer}>
-              Here is the list of notifications
+              Your Notifications
             </div>
           )}
           {displayDrawer && (
