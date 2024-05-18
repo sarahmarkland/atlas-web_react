@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import Notifications from './Notifications';
 import NotificationItem from './NotificationItem';
 import { StyleSheetTestUtils } from 'aphrodite';
+import '../../config/setupTests';
 
 describe('Notifications component', () => {
   beforeEach(() => {

@@ -8,8 +8,8 @@ class Notifications extends Component {
   static propTypes = {
     displayDrawer: PropTypes.bool,
     listNotifications: PropTypes.arrayOf(NotificationItemShape),
-    handleDisplayDrawer: PropTypes.func.isRequired,
-    handleHideDrawer: PropTypes.func.isRequired,
+    handleDisplayDrawer: PropTypes.func,
+    handleHideDrawer: PropTypes.func,
   };
 
   static defaultProps = {
@@ -49,7 +49,7 @@ class Notifications extends Component {
         <div className={css(styles.notificationMenu)}>
           {!displayDrawer && (
             <div className={css(styles.menuItem)} onClick={handleDisplayDrawer}>
-              Your notifications
+              Here is the list of notifications
             </div>
           )}
           {displayDrawer && (
