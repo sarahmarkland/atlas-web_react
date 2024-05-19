@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import App from './App';
-
 import Notifications from '../Notifications/Notifications';
 import Header from '../Header/Header';
 import Login from '../Login/Login';
@@ -46,9 +45,15 @@ describe('App component', () => {
     expect(wrapper.find(CourseList).exists()).toBe(false);
   });
 
-  describe('when isLoggedIn is true', () => {
+  describe('when user is logged in', () => {
     beforeEach(() => {
-      wrapper.setProps({ isLoggedIn: true });
+      wrapper.setState({
+        user: {
+          email: 'test@example.com',
+          password: 'password',
+          isLoggedIn: true,
+        },
+      });
     });
 
     it('should not include the Login component', () => {
@@ -62,17 +67,14 @@ describe('App component', () => {
 
   describe('key event handling', () => {
     it('should call logOut function and alert when Ctrl + h keys are pressed', () => {
-      const logOutMock = jest.fn();
-      const wrapper = shallow(<App logOut={logOutMock} />);
       const alertMock = jest.spyOn(window, 'alert').mockImplementation(() => {});
-
       const mockEvent = { ctrlKey: true, key: 'h', preventDefault: jest.fn() };
 
       // trigger keydown event with ctrl+h keys
       wrapper.instance().handleKeyDown(mockEvent);
 
       expect(alertMock).toHaveBeenCalledWith('Logging you out');
-      expect(logOutMock).toHaveBeenCalled();
+      expect(wrapper.state().user.isLoggedIn).toBe(false);
 
       alertMock.mockRestore();
     });
@@ -93,6 +95,33 @@ describe('App component', () => {
       expect(wrapper.state().displayDrawer).toBe(true); // Ensure it's true first
       wrapper.instance().handleHideDrawer();
       expect(wrapper.state().displayDrawer).toBe(false);
+    });
+  });
+
+  describe('login and logout functions', () => {
+    it('should update state correctly when logIn is called', () => {
+      wrapper.instance().logIn('test@example.com', 'password');
+      expect(wrapper.state().user).toEqual({
+        email: 'test@example.com',
+        password: 'password',
+        isLoggedIn: true,
+      });
+    });
+
+    it('should update state correctly when logOut is called', () => {
+      wrapper.setState({
+        user: {
+          email: 'test@example.com',
+          password: 'password',
+          isLoggedIn: true,
+        },
+      });
+      wrapper.instance().logOut();
+      expect(wrapper.state().user).toEqual({
+        email: '',
+        password: '',
+        isLoggedIn: false,
+      });
     });
   });
 });

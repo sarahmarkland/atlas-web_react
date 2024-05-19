@@ -1,7 +1,7 @@
 // React State - Task 2: Context
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
@@ -22,12 +22,12 @@ class App extends Component {
         password: '',
         isLoggedIn: false,
       },
-      logOut: this.logOut,
-      logIn: this.logIn,
     };
       this.handleKeyDown = this.handleKeyDown.bind(this);
       this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
       this.handleHideDrawer = this.handleHideDrawer.bind(this);
+      this.logIn = this.logIn.bind(this);
+      this.logOut = this.logOut.bind(this);
   }
 
   componentDidMount() {
@@ -42,7 +42,7 @@ class App extends Component {
     if (event.ctrlKey && event.key === 'h') {
       event.preventDefault();
       alert('Logging you out');
-      this.state.logOut();
+      this.logOut();
     }
   }
 
@@ -78,7 +78,7 @@ class App extends Component {
   };
 
   render() {
-    const { displayDrawer, user, logOut, logIn } = this.state;
+    const { displayDrawer, user } = this.state;
     const listCourses = [
     { id: 1, name: 'ES6', credit: 60 },
     { id: 2, name: 'Webpack', credit: 20 },
@@ -92,7 +92,7 @@ class App extends Component {
     ];
 
     return (
-      <AppContext.Provider value={{ user, logOut, logIn }}>
+      <AppContext.Provider value={{ user, logOut: this.logOut, logIn: this.logIn }}>
         <Notifications
         displayDrawer={displayDrawer}
         listNotifications={listNotifications} 
@@ -107,7 +107,7 @@ class App extends Component {
             </BodySectionWithMarginBottom>
           ) : (
           <BodySectionWithMarginBottom title='Log in to continue'>
-            <Login logIn={logIn}/>
+            <Login logIn={this.logIn}/>
           </BodySectionWithMarginBottom>
           )}
           <BodySection title='News from the School'>
