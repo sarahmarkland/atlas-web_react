@@ -5,7 +5,7 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: false,
+      // isLoggedIn: false,
       email: '',
       password: '',
       enableSubmit: false,
@@ -19,8 +19,8 @@ class Login extends Component {
 
   handleLoginSubmit(event) {
     event.preventDefault();
-    this.setState({ isLoggedIn: true });
-    console.log('Login successful:', this.state);
+    const { email, password } = this.state;
+    this.props.logIn(email, password);
   }
 
   handleChangeEmail(event) {

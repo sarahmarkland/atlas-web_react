@@ -13,16 +13,6 @@ import BodySection from '../BodySection/BodySection';
 import AppContext from './AppContext';
 
 class App extends Component {
-  static propTypes = {
-    isLoggedIn: PropTypes.bool,
-    logOut: PropTypes.func,
-  }
-
-  static defaultProps = {
-    isLoggedIn: false,
-    logOut: () => {},
-  }
-
   constructor(props) {
     super(props);
     this.state = {
@@ -33,6 +23,7 @@ class App extends Component {
         isLoggedIn: false,
       },
       logOut: this.logOut,
+      logIn: this.logIn,
     };
       this.handleKeyDown = this.handleKeyDown.bind(this);
       this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
@@ -65,6 +56,16 @@ class App extends Component {
     this.setState({ displayDrawer: false });
   }
 
+  logIn = (email, password) => {
+    this.setState({
+      user: {
+        email,
+        password,
+        isLoggedIn: true,
+      },
+    });
+  };
+
   logOut = () => {
     this.setState({
       user: {
@@ -77,7 +78,7 @@ class App extends Component {
   };
 
   render() {
-    const { displayDrawer, user, logOut } = this.state;
+    const { displayDrawer, user, logOut, logIn } = this.state;
     const listCourses = [
     { id: 1, name: 'ES6', credit: 60 },
     { id: 2, name: 'Webpack', credit: 20 },
@@ -91,7 +92,7 @@ class App extends Component {
     ];
 
     return (
-      <AppContext.Provider value={{ user, logOut }}>
+      <AppContext.Provider value={{ user, logOut, logIn }}>
         <Notifications
         displayDrawer={displayDrawer}
         listNotifications={listNotifications} 
@@ -106,20 +107,18 @@ class App extends Component {
             </BodySectionWithMarginBottom>
           ) : (
           <BodySectionWithMarginBottom title='Log in to continue'>
-            <Login />
+            <Login logIn={logIn}/>
           </BodySectionWithMarginBottom>
           )}
-
           <BodySection title='News from the School'>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque et neque ex. Praesent eleifend, justo eget tristique placerat, lorem felis semper nibh, eu lacinia lectus odio sit amet diam. Ut suscipit sollicitudin magna, sed fermentum ante vestibulum ac. Mauris non ex sem. Morbi finibus, lorem id placerat ullamcorper, nunc metus suscipit nisl, eget dignissim turpis lorem a justo. Suspendisse in rutrum metus. In nec ornare mi. Praesent a metus nec libero mollis facilisis.
             </p>
           </BodySection>
-
           <hr className={css(styles.hr)} />
           <Footer />
         </div>
-        </AppContext.Provider>
+      </AppContext.Provider>
     );
   }
 }
