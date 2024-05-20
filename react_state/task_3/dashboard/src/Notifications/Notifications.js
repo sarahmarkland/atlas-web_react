@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import NotificationItem from './NotificationItem';
 import { NotificationItemShape } from './NotificationItemShape';
 import { StyleSheet, css } from 'aphrodite';
 
-class Notifications extends Component {
+class Notifications extends PureComponent {
   static propTypes = {
     displayDrawer: PropTypes.bool,
     listNotifications: PropTypes.arrayOf(NotificationItemShape),
     handleDisplayDrawer: PropTypes.func,
     handleHideDrawer: PropTypes.func,
+    markNotificationAsRead: PropTypes.func,
   };
 
   static defaultProps = {
@@ -17,29 +18,11 @@ class Notifications extends Component {
     listNotifications: [],
     handleDisplayDrawer: () => {},
     handleHideDrawer: () => {},
+    markNotificationAsRead: () => {},
   };
 
-  markAsRead(id) {
-    console.log(`Notification ${id} has been marked as read`);
-  }
-
-  constructor(props) {
-    super(props);
-    this.markAsRead = this.markAsRead.bind(this);
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return nextProps.listNotifications.length > this.props.listNotifications.length || nextProps.displayDrawer !== this.props.displayDrawer;
-  }
-
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.listNotifications !== prevProps.listNotifications) {
-  //     this.setState({ prevListLength: this.props.listNotifications.length });
-  //   }
-  // }
-
   render() {
-    const { displayDrawer, listNotifications, handleDisplayDrawer, handleHideDrawer } = this.props;
+    const { displayDrawer, listNotifications, handleDisplayDrawer, handleHideDrawer, markNotificationAsRead } = this.props;
 
     return (
       <>
@@ -72,7 +55,7 @@ class Notifications extends Component {
                         type={notification.type}
                         value={notification.value}
                         html={notification.html}
-                        markAsRead={this.markAsRead}
+                        markAsRead={markNotificationAsRead}
                       />
                     ))}
                   </ul>
