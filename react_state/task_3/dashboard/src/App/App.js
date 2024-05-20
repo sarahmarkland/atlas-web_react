@@ -22,12 +22,19 @@ class App extends Component {
         password: '',
         isLoggedIn: false,
       },
+      listNotifications: [
+        { id: 1, type: 'default', value: 'New course available' },
+        { id: 2, type: 'urgent', value: 'New resume available' },
+        { id: 3, html: { __html: getLatestNotification() }, type: 'urgent'}
+      ]
     };
+
       this.handleKeyDown = this.handleKeyDown.bind(this);
       this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
       this.handleHideDrawer = this.handleHideDrawer.bind(this);
       this.logIn = this.logIn.bind(this);
       this.logOut = this.logOut.bind(this);
+      this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
   }
 
   componentDidMount() {
@@ -77,27 +84,28 @@ class App extends Component {
     console.log('User logged out');
   };
 
+  markNotificationAsRead(id) {
+    this.setState((prevState) => ({
+      listNotifications: prevState.listNotifications.filter((notification) => notification.id !== id),
+    }));
+  }
+
   render() {
     const { displayDrawer, user } = this.state;
     const listCourses = [
-    { id: 1, name: 'ES6', credit: 60 },
-    { id: 2, name: 'Webpack', credit: 20 },
-    { id: 3, name: 'React', credit: 40 }
-  ];
-
-    const listNotifications = [
-      { id: 1, type: 'default', value: 'New course available' },
-      { id: 2, type: 'urgent', value: 'New resume available' },
-      { id: 3, html: { __html: getLatestNotification() }, type: 'urgent'}
+      { id: 1, name: 'ES6', credit: 60 },
+      { id: 2, name: 'Webpack', credit: 20 },
+      { id: 3, name: 'React', credit: 40 }
     ];
 
     return (
       <AppContext.Provider value={{ user, logOut: this.logOut, logIn: this.logIn }}>
         <Notifications
         displayDrawer={displayDrawer}
-        listNotifications={listNotifications} 
+        listNotifications={this.state.listNotifications}
         handleDisplayDrawer={this.handleDisplayDrawer}
         handleHideDrawer={this.handleHideDrawer}
+        markNotificationAsRead={this.markNotificationAsRead}
       />
         <div className={css(styles.App)}>
           <Header />
