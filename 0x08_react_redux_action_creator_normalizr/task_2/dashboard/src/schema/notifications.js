@@ -7,11 +7,11 @@
 import{ schema, normalize } from 'normalizr';
 import * as notificationsData from '../../notifications.json';
 
-const user = new schema.Entity("users");
-const message = new schema.Entity("messages", {}, {
+const user = new schema.Entity('users');
+const message = new schema.Entity('messages', {}, {
   idAttribute: 'guid' // use guid as the unique identifier for messages instead of default id
 });
-const notification = new schema.Entity("notifications", {
+const notification = new schema.Entity('notifications', {
   author: user,
   context: message
 });
@@ -26,7 +26,7 @@ export { user, message, notification, normalizedData };
  * @returns {Array} - The list of notification context objects for the given user ID.
  */
 function getAllNotificationsByUser(userId) {
-  const { entities: { notifications, users, messages } } = normalizedData;
+  const { entities: { notifications, messages } } = normalizedData;
   const userNotifications = [];
 
   for (const key in notifications) {
