@@ -1,7 +1,9 @@
 // TASK 7: src/actions/uiActionCreators.js
 // Actions are like messages that you send to Redux to let it know something
 // happened and it might need to update the state accordingly.
-
+import { bindActionCreators } from 'redux';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
 import {
   LOGIN,
   LOGOUT,
@@ -17,11 +19,34 @@ import {
  * @param {string} password - The user's password.
  * @returns {Object} - The action object with type LOGIN and user data.
  */
-
 export function login(email, password) {
   return {
       type: LOGIN,
       user: { email, password },
+  };
+}
+
+/**
+ * Action creator for login success.
+ * @param {Object} user - The user data.
+ * @returns {Object} - The action object with type LOGIN_SUCCESS and user data.
+ */
+export function loginSuccess(user) {
+  return {
+    type: LOGIN_SUCCESS,
+    user,
+  };
+}
+
+/**
+ * Action creator for login failure.
+ * @param {string} error - The error message.
+ * @returns {Object} - The action object with type LOGIN_FAILURE and error message.
+ */
+export function loginFailure(error) {
+  return {
+    type: LOGIN_FAILURE,
+    error,
   };
 }
 
@@ -51,25 +76,31 @@ export function displayNotificationDrawer() {
  * Action creator for hiding the notification drawer.
  * @returns {Object} - The action object with type HIDE_NOTIFICATION_DRAWER.
  */
-
 export function hideNotificationDrawer() {
   return {
       type: HIDE_NOTIFICATION_DRAWER,
   };
 }
 
-// TASK 6: Bind UI action creators
-// The handlers (handleLogin, handleLogout, handleDisplayNotificationDrawer,
-// and handleHideNotificationDrawer) call the respective action creators
-// when buttons are clicked.
-import { bindActionCreators } from 'redux';
-import { useDispatch } from 'react-redux';
-import {
-  login,
-  logout,
-  displayNotificationDrawer,
-  hideNotificationDrawer
-} from './uiActionCreators';
+/**
+ * Async action creator for logging in.
+ * @param {string} email - The user's email.
+ * @param {string} password - The user's password.
+ * @returns {Function} - A function to dispatch login success or failure.
+ */
+export function loginRequest(email, password) {
+  return(dispatch) => {
+    dispatch(login(email, password));
+    return axios
+    .post('/dist/login-success.json', { email, password })
+    .then((response) => {
+      dispatch({ type: LOGIN_SUCCESS, user: response.data });
+    })
+    .catch((error) => {
+      dispatch({ type: LOGIN_FAILURE, error: error.message });
+    });
+  };
+}
 
 /**
  * Custom hook to bind UI action creators.
@@ -81,6 +112,7 @@ export function useBoundUIActions() {
     login,
     logout,
     displayNotificationDrawer,
-    hideNotificationDrawer
+    hideNotificationDrawer,
+    loginRequest,
   }, dispatch);
 }
