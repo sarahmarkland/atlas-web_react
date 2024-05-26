@@ -2,7 +2,12 @@
 import { schema, normalize } from 'normalizr';
 
 // Define a course schema
-const course = new schema.Entity('courses');
+const course = new schema.Entity('courses', {}, {
+  processStrategy: (entity) => ({
+      ...entity,
+      isSelected: false
+  })
+});
 
 // Define an array schema for a list of courses
 const courseList = [course];
