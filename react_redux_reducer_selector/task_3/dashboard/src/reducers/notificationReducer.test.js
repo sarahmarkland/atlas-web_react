@@ -1,5 +1,4 @@
 // TASK 3 - reducers: reducers/notificationReducer.test.js
-
 import notificationReducer from './notificationReducer';
 import { FETCH_NOTIFICATIONS_SUCCESS, MARK_AS_READ, SET_TYPE_FILTER } from '../actions/notificationActionTypes';
 
@@ -53,11 +52,15 @@ describe('notificationReducer', () => {
   });
 
   it('should handle SET_TYPE_FILTER and update the filter correctly', () => {
+    const initialStateWithNotifications = {
+      filter: 'DEFAULT',
+      notifications: notificationsWithReadFlag
+    };
     const expectedState = {
       filter: 'URGENT',
       notifications: notificationsWithReadFlag
     };
-    const state = notificationReducer(undefined, { type: SET_TYPE_FILTER, filter: 'URGENT' });
+    const state = notificationReducer(initialStateWithNotifications, { type: SET_TYPE_FILTER, filter: 'URGENT' });
     expect(state).toEqual(expectedState);
   });
 });

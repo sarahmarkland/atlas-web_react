@@ -1,5 +1,4 @@
 // TASK 3 - reducers: reducers/notificationReducer.js
-
 import { FETCH_NOTIFICATIONS_SUCCESS, MARK_AS_READ, SET_TYPE_FILTER } from '../actions/notificationActionTypes';
 
 // Default state
@@ -14,7 +13,7 @@ const notificationReducer = (state = initialState, action) => {
     case FETCH_NOTIFICATIONS_SUCCESS:
       return {
         ...state,
-        notifications: action.data.map(notification => ({
+        notifications: (action.data || []).map(notification => ({
           ...notification,
           isRead: false
         }))

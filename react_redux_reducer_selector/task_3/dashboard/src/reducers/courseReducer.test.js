@@ -12,11 +12,11 @@ describe('courseReducer', () => {
     { id: 3, name: "React", credit: 40 }
   ];
 
-  const coursesWithSelection = [
-    { id: 1, name: "ES6", credit: 60, isSelected: false },
-    { id: 2, name: "Webpack", credit: 20, isSelected: false },
-    { id: 3, name: "React", credit: 40, isSelected: false }
-  ];
+  // const coursesWithSelection = [
+  //   { id: 1, name: "ES6", credit: 60, isSelected: false },
+  //   { id: 2, name: "Webpack", credit: 20, isSelected: false },
+  //   { id: 3, name: "React", credit: 40, isSelected: false }
+  // ];
 
   it('should return the initial state when no action is passed', () => {
     const state = courseReducer(undefined, {});
