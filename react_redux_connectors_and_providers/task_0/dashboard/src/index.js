@@ -1,15 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// import './index.css';
+import { Provider } from 'react-redux';
+import { createStore, combineReducers } from 'redux';
 import App from './App/App';
-// import Notifications from './Notifications/Notifications';
-// import reportWebVitals from './reportWebVitals';
+import uiReducer from './reducers/uiReducer';
+
+const rootReducer = combineReducers({
+  uiReducer,
+});
+
+const store = createStore(rootReducer);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    {/* <Notifications /> */}
-    <App isLoggedIn={false} />
+    <Provider store={store}>
+      {/* isLoggedIn does not need to be passed in as a prop directly,
+       it's mapped from the Redux state using the mapStateToProps function */}
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 
