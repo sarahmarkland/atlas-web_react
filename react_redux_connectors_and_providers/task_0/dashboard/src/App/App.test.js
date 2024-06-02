@@ -1,12 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import App from './App';
+import App, { mapStateToProps } from './App';
 import Notifications from '../Notifications/Notifications';
 import Header from '../Header/Header';
 import Login from '../Login/Login';
 import Footer from '../Footer/Footer';
 import CourseList from '../CourseList/CourseList';
 import { StyleSheetTestUtils } from 'aphrodite';
+import { fromJS } from 'immutable';
 
 describe('App component', () => {
   let wrapper;
@@ -142,5 +143,19 @@ describe('App component', () => {
 
       expect(wrapper.state().listNotifications).toEqual(expectedNotifications);
     });
+  });
+});
+
+describe('mapStateToProps', () => {
+  it('should return the correct props based on the state', () => {
+    const state = fromJS({
+      uiReducer: {
+        isUserLoggedIn: true,
+      },
+    });
+    const expectedProps = {
+      isLoggedIn: true,
+    };
+    expect(mapStateToProps(state)).toEqual(expectedProps);
   });
 });

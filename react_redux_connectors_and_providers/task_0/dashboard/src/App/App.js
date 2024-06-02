@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
@@ -12,10 +11,6 @@ import { getLatestNotification } from '../utils/utils';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 import BodySection from '../BodySection/BodySection';
 import AppContext from './AppContext';
-
-const mapStateToProps = (state) => ({
-  isLoggedIn: state.uiReducer.isLoggedIn,
-});
 
 class App extends Component {
   constructor(props) {
@@ -164,6 +159,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     // margin: '20px 0',
   },
+});
+
+const mapStateToProps = (state) => ({
+  isLoggedIn: state.uiReducer.get('isUserLoggedIn'),
 });
 
 export default connect(mapStateToProps)(App);
