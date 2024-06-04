@@ -55,13 +55,11 @@ class App extends Component {
   }
 
   handleDisplayDrawer() {
-    console.log('Display drawer');
-    this.setState({ displayDrawer: true });
+    this.props.displayNotificationDrawer();
   }
 
   handleHideDrawer() {
-    console.log('Hide drawer');
-    this.setState({ displayDrawer: false });
+    this.props.hideNotificationDrawer();
   }
 
   logIn = (email, password) => {
@@ -92,7 +90,8 @@ class App extends Component {
   }
 
   render() {
-    const { displayDrawer, user } = this.state;
+    const { user } = this.state;
+    const { displayDrawer } = this.props;
     const listCourses = [
       { id: 1, name: 'ES6', credit: 60 },
       { id: 2, name: 'Webpack', credit: 20 },
@@ -166,5 +165,10 @@ const mapStateToProps = (state) => ({
   isLoggedIn: state.uiReducer.get('isUserLoggedIn'),
   displayDrawer: state.uiReducer.get('isNotificationDrawerVisible'),
 });
+
+const mapDispatchToProps = (dispatch) => ({
+  displayNotificationDrawer: () => dispatch(displayNotificationDrawer()),
+  hideNotificationDrawer: () => dispatch(hideNotificationDrawer()),
+})
 
 export default connect(mapStateToProps)(App);
