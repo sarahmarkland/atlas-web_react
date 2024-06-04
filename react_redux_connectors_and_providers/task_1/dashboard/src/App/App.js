@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
@@ -31,8 +32,6 @@ class App extends Component {
     };
 
       this.handleKeyDown = this.handleKeyDown.bind(this);
-      this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
-      this.handleHideDrawer = this.handleHideDrawer.bind(this);
       this.logIn = this.logIn.bind(this);
       this.logOut = this.logOut.bind(this);
       this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
@@ -52,14 +51,6 @@ class App extends Component {
       alert('Logging you out');
       this.logOut();
     }
-  }
-
-  handleDisplayDrawer() {
-    this.props.displayNotificationDrawer();
-  }
-
-  handleHideDrawer() {
-    this.props.hideNotificationDrawer();
   }
 
   logIn = (email, password) => {
@@ -171,4 +162,4 @@ const mapDispatchToProps = (dispatch) => ({
   hideNotificationDrawer: () => dispatch(hideNotificationDrawer()),
 })
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
