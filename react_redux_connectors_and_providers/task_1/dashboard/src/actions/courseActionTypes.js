@@ -1,0 +1,8 @@
+// TASK 2 - reducers - actions/courseActionTypes.js
+
+export const SELECT_COURSE = 'SELECT_COURSE';
+export const UNSELECT_COURSE = 'UNSELECT_COURSE';
+export const FETCH_COURSE_SUCCESS = 'FETCH_COURSE_SUCCESS';
+export const FETCH_NOTIFICATIONS_SUCCESS = 'FETCH_NOTIFICATIONS_SUCCESS';
+export const MARK_AS_READ = 'MARK_AS_READ';
+export const SET_TYPE_FILTER = 'SET_TYPE_FILTER';
