@@ -94,10 +94,10 @@ export function loginRequest(email, password) {
     return axios
     .post('/dist/login-success.json', { email, password })
     .then((response) => {
-      dispatch({ type: LOGIN_SUCCESS, user: response.data });
+      dispatch(loginSuccess(response.data));
     })
     .catch((error) => {
-      dispatch({ type: LOGIN_FAILURE, error: error.message });
+      dispatch(loginFailure(error.message));
     });
   };
 }
