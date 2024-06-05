@@ -84,30 +84,6 @@ describe('App component', () => {
       expect(wrapper.find(CourseList).exists()).toBe(true);
     });
   });
-
-  describe ('when user is logged in', () => {
-    beforeEach(() => {
-      store = mockStore({
-        ui: fromJS({
-          isNotificationDrawerVisible: false,
-          isUserLoggedIn: true,
-        }),
-      });
-      wrapper = shallow(
-        <Provider store={store}>
-          <App />
-        </Provider>
-      ).dive();
-    });
-
-    it('should not include the Login component', () => {
-      expect(wrapper.find(Login).exists()).toBe(false);
-    });
-
-    it('should include the CourseList component', () => {
-      expect(wrapper.find(CourseList).exists()).toBe(true);
-    });
-  });
 });
 
 describe('mapStateToProps', () => {
