@@ -20,7 +20,15 @@ function Footer({ user }) {
 Footer.propTypes = {
   user: PropTypes.shape({
     isLoggedIn: PropTypes.bool,
+    email: PropTypes.string,
   }).isRequired,
+};
+
+Footer.defaultProps = {
+  user: {
+    isLoggedIn: false,
+    email: '',
+  },
 };
 
 const mapStateToProps = (state) => ({
