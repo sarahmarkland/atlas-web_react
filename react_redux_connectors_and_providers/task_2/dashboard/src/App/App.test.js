@@ -1,40 +1,30 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import { configureStore } from 'redux-mock-store';
 import { shallow } from 'enzyme';
 import App, { mapStateToProps } from './App';
 import Notifications from '../Notifications/Notifications';
-import { fromJS } from 'immutable';
 import Header from '../Header/Header';
 import Login from '../Login/Login';
 import Footer from '../Footer/Footer';
 import CourseList from '../CourseList/CourseList';
 import { StyleSheetTestUtils } from 'aphrodite';
-
-const mockStore = configureStore([]);
-let store;
+import { fromJS } from 'immutable';
 
 describe('App component', () => {
   let wrapper;
 
   beforeEach(() => {
     StyleSheetTestUtils.suppressStyleInjection();
-    store = mockStore({
-      ui: fromJS({
-        isNotificationDrawerVisible: false,
-        isUserLoggedIn: false,
-      }),
-    });
-    wrapper = shallow(
-      <Provider store={store}>
-        <App />
-      </Provider>
-    ).dive();
+    const props = {
+      isLoggedIn: false,
+      displayDrawer: false,
+      displayNotificationDrawer: jest.fn(),
+      hideNotificationDrawer: jest.fn(),
+    };
+    wrapper = shallow(<App {...props} />);
   });
 
   afterEach(() => {
     StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
-    jest.restoreAllMocks();
   });
 
   it('should render without crashing', () => {
@@ -63,17 +53,13 @@ describe('App component', () => {
 
   describe('when user is logged in', () => {
     beforeEach(() => {
-      store = mockStore({
-        ui: fromJS({
-          isNotificationDrawerVisible: false,
-          isUserLoggedIn: true,
-        }),
-      });
-      wrapper = shallow(
-        <Provider store={store}>
-          <App />
-        </Provider>
-      ).dive();
+      const loggedInProps = {
+        isLoggedIn: true,
+        displayDrawer: false,
+        displayNotificationDrawer: jest.fn(),
+        hideNotificationDrawer: jest.fn(),
+      };
+      wrapper = shallow(<App {...loggedInProps} />);
     });
 
     it('should not include the Login component', () => {
@@ -89,12 +75,14 @@ describe('App component', () => {
 describe('mapStateToProps', () => {
   it('should return the correct props based on the state', () => {
     const state = fromJS({
-      uiReducer: {
+      ui: {
         isUserLoggedIn: true,
+        isNotificationDrawerVisible: false,
       },
     });
     const expectedProps = {
       isLoggedIn: true,
+      displayDrawer: false,
     };
     expect(mapStateToProps(state)).toEqual(expectedProps);
   });

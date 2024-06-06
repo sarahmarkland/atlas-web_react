@@ -1,8 +1,7 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import Footer from './Footer';
 import { StyleSheetTestUtils } from 'aphrodite';
-import { AppContext } from '../App/AppContext';
 
 describe('Footer Component', () => {
   beforeEach(() => {
@@ -14,50 +13,27 @@ describe('Footer Component', () => {
   });
 
   it('should render without crashing', () => {
-    const wrapper = shallow(<Footer />);
+    const wrapper = shallow(<Footer user={{ isLoggedIn: false }} />);
     expect(wrapper.exists()).toBe(true);
   });
 
   it('should render the text "Copyright"', () => {
-    const wrapper = shallow(<Footer />);
+    const wrapper = shallow(<Footer user={{ isLoggedIn: false }} />);
     expect(wrapper.text()).toContain('Copyright');
   });
 
-  test('should render a div with the class "App-footer"', () => {
-    const wrapper = shallow(<Footer />);
+  it('should render a footer with the class "App-footer"', () => {
+    const wrapper = shallow(<Footer user={{ isLoggedIn: false }} />);
     expect(wrapper.find('footer.App-footer').exists()).toBe(true);
   });
 
-  it('should not display the contact link when the user is logged out',() => {
-    const contextValue = {
-      user: {
-        isLoggedIn: false,
-      },
-    };
-
-    const wrapper = mount(
-      <AppContext.Provider value={contextValue}>
-        <Footer />
-      </AppContext.Provider>
-    );
-
+  it('should not display the contact link when the user is logged out', () => {
+    const wrapper = shallow(<Footer user={{ isLoggedIn: false }} />);
     expect(wrapper.find('#contact-link').exists()).toBe(false);
   });
 
   it('should display the contact link when the user is logged in', () => {
-    const contextValue = {
-      user: {
-        isLoggedIn: true,
-        email: 'test@example.com',
-      },
-    };
-    
-    const wrapper = mount(
-      <AppContext.Provider value={contextValue}>
-        <Footer />
-      </AppContext.Provider>
-    );
-
+    const wrapper = shallow(<Footer user={{ isLoggedIn: true, email: 'test@example.com' }} />);
     expect(wrapper.find('#contact-link').exists()).toBe(true);
   });
 });
